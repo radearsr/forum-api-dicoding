@@ -164,15 +164,15 @@ describe("CommentRepositoryPostgres", () => {
       const commentPayload = {
         id: "comment-123",
         content: "A Comment",
-        thread: threadPayload.id,
-        owner: userPayload.id,
+        thread: "thread-h123",
+        owner: "user-123",
       };
 
       await UsersTableTestHelper.addUser(userPayload);
       await ThreadsTableTestHelper.addThread(threadPayload);
       await CommentsTableTestHelper.addComment(commentPayload);
 
-      const comments = await commentRepositoryPostgres.getCommentsThread(threadPayload.id);
+      const comments = await commentRepositoryPostgres.getCommentsThread("thread-h123");
       const [comment] = comments;
       expect(Array.isArray(comments)).toBe(true);
       expect(comment.id).toEqual(commentPayload.id);
