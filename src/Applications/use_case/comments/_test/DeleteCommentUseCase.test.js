@@ -1,6 +1,6 @@
 const DeleteCommentUseCase = require("../DeleteCommentUseCase");
-const CommentRepository = require("../../../Domains/comments/CommentRepository");
-const ThreadRepository = require("../../../Domains/threads/ThreadRepository");
+const CommentRepository = require("../../../../Domains/comments/CommentRepository");
+const ThreadRepository = require("../../../../Domains/threads/ThreadRepository");
 
 describe("DeleteCommentUseCase", () => {
   it("should throw error when not contain needed property", async () => {

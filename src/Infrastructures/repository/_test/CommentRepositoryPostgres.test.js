@@ -178,7 +178,7 @@ describe("CommentRepositoryPostgres", () => {
       expect(comment.id).toEqual(commentPayload.id);
       expect(comment.username).toEqual(userPayload.username);
       expect(comment.content).toEqual(commentPayload.content);
-      expect(comment.date).toBeDefined();
+      expect(comment.date).toBeInstanceOf(Date);
     });
   });
 });

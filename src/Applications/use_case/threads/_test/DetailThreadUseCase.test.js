@@ -1,5 +1,5 @@
-const CommentRepository = require("../../../Domains/comments/CommentRepository");
-const ThreadRepository = require("../../../Domains/threads/ThreadRepository");
+const CommentRepository = require("../../../../Domains/comments/CommentRepository");
+const ThreadRepository = require("../../../../Domains/threads/ThreadRepository");
 const DetailThreadUseCase = require("../DetailThreadUseCase");
 
 describe("DetailThreadUseCase", () => {
@@ -49,7 +49,6 @@ describe("DetailThreadUseCase", () => {
     });
 
     const detailThread = await detailThreadUseCase.execute(useCasePayload);
-
     expect(mockThreadRepository.getDetailThread)
       .toHaveBeenCalledWith(useCasePayload.thread);
     expect(mockCommentRepository.getCommentsThread)

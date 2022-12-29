@@ -1,5 +1,5 @@
-const DetailThread = require("../../Domains/threads/entities/DetailThread");
-const DetailComment = require("../../Domains/comments/entities/DetailComment");
+const DetailThread = require("../../../Domains/threads/entities/DetailThread");
+const DetailComment = require("../../../Domains/comments/entities/DetailComment");
 
 class DetailThreadUseCase {
   constructor({

@@ -6,13 +6,8 @@ class DetailThread {
   }
 
   _verifyPayload({ thread }) {
-    if (!thread) {
-      throw new Error("DETAIL_THREAD.NOT_CONTAIN_NEEDED_PROPERTY");
-    }
-
-    if (typeof thread !== "string") {
-      throw new Error("DETAIL_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION");
-    }
+    if (!thread) throw new Error("DETAIL_THREAD.NOT_CONTAIN_NEEDED_PROPERTY");
+    if (typeof thread !== "string") throw new Error("DETAIL_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION");
   }
 }
 
