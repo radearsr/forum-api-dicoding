@@ -88,6 +88,7 @@ describe("ThreadRepositoryPostgres", () => {
       expect(detailThread.title).toEqual(threadPayload.title);
       expect(detailThread.body).toEqual(threadPayload.body);
       expect(detailThread.username).toEqual(userPayload.username);
+      expect(detailThread.date).toBeInstanceOf(Date);
     });
   });
 });
