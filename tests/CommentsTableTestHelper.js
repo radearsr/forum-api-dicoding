@@ -19,12 +19,14 @@ const CommentsTableTestHelper = {
     thread = "thread-123",
     owner = "user-123",
   }) {
+    const createAt = new Date().toISOString();
     const query = {
-      text: "INSERT INTO comments (id, content, thread, owner) VALUES($1, $2, $3, $4)",
-      values: [id, content, thread, owner],
+      text: "INSERT INTO comments (id, content, thread, owner, created_at) VALUES($1, $2, $3, $4, $5) RETURNING id, content, thread, owner, created_at",
+      values: [id, content, thread, owner, createAt],
     };
 
-    await pool.query(query);
+    const result = await pool.query(query);
+    return result.rows[0];
   },
   async checkDeletedCommentById(commentId) {
     const query = {

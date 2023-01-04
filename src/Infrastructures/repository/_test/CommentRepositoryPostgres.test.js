@@ -168,17 +168,17 @@ describe("CommentRepositoryPostgres", () => {
         owner: "user-123",
       };
 
-      await UsersTableTestHelper.addUser(userPayload);
+      const addedUser = await UsersTableTestHelper.addUser(userPayload);
       await ThreadsTableTestHelper.addThread(threadPayload);
-      await CommentsTableTestHelper.addComment(commentPayload);
+      const addedComment = await CommentsTableTestHelper.addComment(commentPayload);
 
       const comments = await commentRepositoryPostgres.getCommentsThread("thread-h123");
       const [comment] = comments;
       expect(Array.isArray(comments)).toBe(true);
-      expect(comment.id).toEqual(commentPayload.id);
-      expect(comment.username).toEqual(userPayload.username);
-      expect(comment.content).toEqual(commentPayload.content);
-      expect(comment.date).toBeInstanceOf(Date);
+      expect(comment.id).toEqual(addedComment.id);
+      expect(comment.username).toEqual(addedUser.username);
+      expect(comment.content).toEqual(addedComment.content);
+      expect(comment.date).toEqual(addedComment.created_at);
     });
   });
 });

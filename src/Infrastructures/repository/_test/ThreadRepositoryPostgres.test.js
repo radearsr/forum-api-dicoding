@@ -79,16 +79,16 @@ describe("ThreadRepositoryPostgres", () => {
         body: "A Body of Title",
         owner: userPayload.id,
       };
-      await UsersTableTestHelper.addUser(userPayload);
-      await ThreadsTableTestHelper.addThread(threadPayload);
+      const addedUser = await UsersTableTestHelper.addUser(userPayload);
+      const addedThread = await ThreadsTableTestHelper.addThread(threadPayload);
 
       const detailThread = await threadRepositoryPostgres.getDetailThread(threadPayload.id);
 
-      expect(detailThread.id).toEqual(threadPayload.id);
-      expect(detailThread.title).toEqual(threadPayload.title);
-      expect(detailThread.body).toEqual(threadPayload.body);
-      expect(detailThread.username).toEqual(userPayload.username);
-      expect(detailThread.date).toBeInstanceOf(Date);
+      expect(detailThread.id).toEqual(addedThread.id);
+      expect(detailThread.title).toEqual(addedThread.title);
+      expect(detailThread.body).toEqual(addedThread.body);
+      expect(detailThread.username).toEqual(addedUser.username);
+      expect(detailThread.date).toEqual(addedThread.created_at);
     });
   });
 });
