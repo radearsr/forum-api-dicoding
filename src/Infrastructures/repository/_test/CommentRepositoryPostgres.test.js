@@ -151,6 +151,8 @@ describe("CommentRepositoryPostgres", () => {
   describe("getCommentsThread", () => {
     it("should get comments of thread", async () => {
       const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {});
+      const createdAt = new Date().toISOString();
+
       const userPayload = {
         id: "user-123",
         username: "radea",
@@ -166,19 +168,19 @@ describe("CommentRepositoryPostgres", () => {
         content: "A Comment",
         thread: "thread-h123",
         owner: "user-123",
+        createdAt,
       };
-
-      const addedUser = await UsersTableTestHelper.addUser(userPayload);
+      await UsersTableTestHelper.addUser(userPayload);
       await ThreadsTableTestHelper.addThread(threadPayload);
-      const addedComment = await CommentsTableTestHelper.addComment(commentPayload);
+      await CommentsTableTestHelper.addComment(commentPayload);
 
       const comments = await commentRepositoryPostgres.getCommentsThread("thread-h123");
       const [comment] = comments;
       expect(Array.isArray(comments)).toBe(true);
-      expect(comment.id).toEqual(addedComment.id);
-      expect(comment.username).toEqual(addedUser.username);
-      expect(comment.content).toEqual(addedComment.content);
-      expect(comment.date).toEqual(addedComment.created_at);
+      expect(comment.id).toEqual("comment-123");
+      expect(comment.username).toEqual("radea");
+      expect(comment.content).toEqual("A Comment");
+      expect(comment.date).toEqual(createdAt);
     });
   });
 });

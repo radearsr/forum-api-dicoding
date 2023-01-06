@@ -10,10 +10,10 @@ const ThreadsTableTestHelper = {
     title = "A thread",
     body = "A Body of thread",
     owner = "user-123",
+    createdAt = new Date().toISOString(),
   }) {
-    const createdAt = new Date().toISOString();
     const query = {
-      text: "INSERT INTO threads VALUES($1, $2, $3, $4, $5) RETURNING id, title, body, owner, created_at",
+      text: "INSERT INTO threads (id, title, body, owner, created_at) VALUES ($1, $2, $3, $4, $5)",
       values: [id, title, body, owner, createdAt],
     };
 

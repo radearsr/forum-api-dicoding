@@ -69,26 +69,32 @@ describe("ThreadRepositoryPostgres", () => {
   describe("getDetailThread function", () => {
     it("should get detail thread", async () => {
       const threadRepositoryPostgres = new ThreadRepositoryPostgres(pool, {});
+      const createdAt = new Date().toISOString();
+
       const userPayload = {
         id: "user-123",
         username: "radea",
+        createdAt,
       };
+
       const threadPayload = {
         id: "thread-h123",
         title: "A Title",
         body: "A Body of Title",
-        owner: userPayload.id,
+        owner: "user-123",
+        createdAt,
       };
-      const addedUser = await UsersTableTestHelper.addUser(userPayload);
-      const addedThread = await ThreadsTableTestHelper.addThread(threadPayload);
+
+      await UsersTableTestHelper.addUser(userPayload);
+      await ThreadsTableTestHelper.addThread(threadPayload);
 
       const detailThread = await threadRepositoryPostgres.getDetailThread(threadPayload.id);
 
-      expect(detailThread.id).toEqual(addedThread.id);
-      expect(detailThread.title).toEqual(addedThread.title);
-      expect(detailThread.body).toEqual(addedThread.body);
-      expect(detailThread.username).toEqual(addedUser.username);
-      expect(detailThread.date).toEqual(addedThread.created_at);
+      expect(detailThread.id).toEqual("thread-h123");
+      expect(detailThread.title).toEqual("A Title");
+      expect(detailThread.body).toEqual("A Body of Title");
+      expect(detailThread.username).toEqual("radea");
+      expect(detailThread.date).toEqual(createdAt);
     });
   });
 });
