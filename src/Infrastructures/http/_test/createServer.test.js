@@ -39,7 +39,7 @@ describe("HTTP server", () => {
   });
 
   describe("when GET / ", () => {
-    it("should return 200 and hello radea surya", async () => {
+    it("should return 200 and hello world", async () => {
       // Arrange
       const server = await createServer({});
 
@@ -52,7 +52,7 @@ describe("HTTP server", () => {
       // Assert
       const responseJson = JSON.parse(response.payload);
       expect(response.statusCode).toEqual(200);
-      expect(responseJson.value).toEqual("Hello Radea Surya!");
+      expect(responseJson.value).toEqual("Hello World!");
     });
   });
 });
