@@ -55,4 +55,21 @@ describe("HTTP server", () => {
       expect(responseJson.value).toEqual("Hello World!");
     });
   });
+
+  describe("when GET /test ", () => {
+    it("should return 200 and hello world", async () => {
+      // Arrange
+      const server = await createServer({});
+
+      // Action
+      const response = await server.inject({
+        method: "GET",
+        url: "/test",
+      });
+
+      // Assert
+      const responseJson = JSON.parse(response.payload);
+      expect(response.statusCode).toEqual(200);
+    });
+  });
 });
