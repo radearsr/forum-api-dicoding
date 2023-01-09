@@ -1,17 +1,18 @@
-name: Continous Integration
-
+name: Continuous Integration
+ 
 on: 
   pull_request:
-    brances:
-      - main
-
+    branches:
+      - master
+ 
 jobs:
   test:
     runs-on: ubuntu-latest
-
+ 
     strategy:
-      node-version: [18.x]
-    
+      matrix:
+        node-version: [14.x]
+ 
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
